@@ -19,12 +19,14 @@ public class ArithmeticOperationController {
     private final List<ArithmeticOperation> operations = Collections.synchronizedList(new ArrayList<>());
 
     @GetMapping("/operations/add")
-    public ArithmeticOperation addNumbers(@RequestParam("first") int first,  @RequestParam("second") int second) {
+    public ArithmeticOperation addNumbers(@RequestParam("first") int first, @RequestParam("second") int second) {
         if (first < MIN_VALUE || first > MAX_VALUE) {
-            throw new IllegalArgumentException("Vigane väärtus: " + first + ". Arvud peavad olema vahemikus 0 kuni 100");}
+            throw new IllegalArgumentException("Vigane väärtus: " + first + ". Arvud peavad olema vahemikus 0 kuni 100");
+        }
         if (second < MIN_VALUE || second > MAX_VALUE) {
-            throw new IllegalArgumentException("Vigane väärtus: " + second + ". Arvud peavad olema vahemikus 0 kuni 100");}
-                int sum = first + second;
+            throw new IllegalArgumentException("Vigane väärtus: " + second + ". Arvud peavad olema vahemikus 0 kuni 100");
+        }
+        int sum = first + second;
         ArithmeticOperation arithmeticOperation = new ArithmeticOperation(first, second, sum);
         operations.add(arithmeticOperation);
         return arithmeticOperation;
@@ -37,7 +39,8 @@ public class ArithmeticOperationController {
         if (number == null) {
             throw new IllegalArgumentException("number peab olema väärtustatud");
         } else if (number < MIN_VALUE || number > MAX_VALUE) {
-            throw new IllegalArgumentException("Arvud peavad olema vahemikus 0 kuni 100");}
+            throw new IllegalArgumentException("Arvud peavad olema vahemikus 0 kuni 100");
+        }
         List<ArithmeticOperation> filteredAndOrderedOperations = new ArrayList<>();
         for (ArithmeticOperation operation : operations) {
             int attribute1 = operation.getAttributeFirst();
@@ -50,11 +53,11 @@ public class ArithmeticOperationController {
 
         if (order.equalsIgnoreCase("desc")) {
             filteredAndOrderedOperations.sort(Comparator.comparingInt(ArithmeticOperation::getResult).reversed());
-        } else{
-            filteredAndOrderedOperations.sort(Comparator.comparingInt(ArithmeticOperation::getResult));}
+        } else {
+            filteredAndOrderedOperations.sort(Comparator.comparingInt(ArithmeticOperation::getResult));
+        }
 
         return filteredAndOrderedOperations;
-
     }
 
 
