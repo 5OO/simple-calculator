@@ -20,9 +20,11 @@ public class ArithmeticOperationController {
 
     @GetMapping("/add")
     public ArithmeticOperation addNumbers(@RequestParam("first") int first,  @RequestParam("second") int second) {
-        if (first < MIN_VALUE || first > MAX_VALUE || second < MIN_VALUE || second > MAX_VALUE) {
-            throw new IllegalArgumentException("Arvud peavad olema vahemikus 0 kuni 100");}
-        int sum = first + second;
+        if (first < MIN_VALUE || first > MAX_VALUE) {
+            throw new IllegalArgumentException("Vigane väärtus: " + first + ". Arvud peavad olema vahemikus 0 kuni 100");}
+        if (second < MIN_VALUE || second > MAX_VALUE) {
+            throw new IllegalArgumentException("Vigane väärtus: " + second + ". Arvud peavad olema vahemikus 0 kuni 100");}
+                int sum = first + second;
         ArithmeticOperation arithmeticOperation = new ArithmeticOperation(first, second, sum);
         operations.add(arithmeticOperation);
         return arithmeticOperation;
