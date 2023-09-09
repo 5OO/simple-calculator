@@ -18,7 +18,7 @@ public class ArithmeticOperationController {
 
     private final List<ArithmeticOperation> operations = Collections.synchronizedList(new ArrayList<>());
 
-    @GetMapping("/add")
+    @GetMapping("/operations/add")
     public ArithmeticOperation addNumbers(@RequestParam("first") int first,  @RequestParam("second") int second) {
         if (first < MIN_VALUE || first > MAX_VALUE) {
             throw new IllegalArgumentException("Vigane väärtus: " + first + ". Arvud peavad olema vahemikus 0 kuni 100");}
@@ -30,7 +30,7 @@ public class ArithmeticOperationController {
         return arithmeticOperation;
     }
 
-    @GetMapping("/search")
+    @GetMapping("/operations/search")
     public List<ArithmeticOperation> searchOperations(
             @RequestParam(value = "number", required = false) Integer number,
             @RequestParam(value = "order", defaultValue = "asc") String order) {
@@ -46,7 +46,7 @@ public class ArithmeticOperationController {
             }
         }
 
-        if (order.equals("desc")) {
+        if (order.equalsIgnoreCase("desc")) {
             filteredAndOrderedOperations.sort(Comparator.comparingInt(ArithmeticOperation::getResult).reversed());
         } else{
             filteredAndOrderedOperations.sort(Comparator.comparingInt(ArithmeticOperation::getResult));}
