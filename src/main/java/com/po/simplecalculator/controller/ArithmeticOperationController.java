@@ -34,7 +34,9 @@ public class ArithmeticOperationController {
     public List<ArithmeticOperation> searchOperations(
             @RequestParam(value = "number", required = false) Integer number,
             @RequestParam(value = "order", defaultValue = "asc") String order) {
-        if (number == null || number < MIN_VALUE || number > MAX_VALUE) {
+        if (number == null) {
+            throw new IllegalArgumentException("number peab olema väärtustatud");
+        } else if (number < MIN_VALUE || number > MAX_VALUE) {
             throw new IllegalArgumentException("Arvud peavad olema vahemikus 0 kuni 100");}
         List<ArithmeticOperation> filteredAndOrderedOperations = new ArrayList<>();
         for (ArithmeticOperation operation : operations) {
