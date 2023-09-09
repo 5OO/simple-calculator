@@ -26,14 +26,24 @@ public class ArithmeticOperationController {
 
     @GetMapping("/search")
     public List<ArithmeticOperation> searchOperations(
-            @RequestParam(required = false) Integer number,
-            @RequestParam("order") String order) {
+            @RequestParam(value = "number", required = false) Integer number,
+            @RequestParam(value = "order", defaultValue = "asc") String order) {
+        if (number == null || number < 0 || number > 100) {
+            throw new IllegalArgumentException("Arvud peavad olema vahemikus 0 kuni 100");}
+        List<ArithmeticOperation> filteredAndOrderedOperations = new ArrayList<>();
+        for (int i = 0; i < operations.size(); i++) {
+            int attribute1 = operations.get(i).getAttributeFirst();
+            int attribute2 =operations.get(i).getAttributeSecond();
+            int sum = operations.get(i).getResult();
+            if (number == attribute1 || number == attribute2 || number == sum) {
+                filteredAndOrderedOperations.add(operations.get(i));
+            }
+        }
 
-        // TODO  lisada otsimise  loogika
 
-
-        List<ArithmeticOperation> filteredAndOrderedOperations = null;
         return filteredAndOrderedOperations;
+
     }
+
 
 }
