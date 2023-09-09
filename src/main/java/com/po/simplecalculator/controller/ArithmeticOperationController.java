@@ -12,12 +12,15 @@ import java.util.List;
 
 @RestController
 public class ArithmeticOperationController {
+    private static final int MIN_VALUE = 0;
+    private static final int MAX_VALUE = 100;
+
 
     private final List<ArithmeticOperation> operations = Collections.synchronizedList(new ArrayList<>());
 
     @GetMapping("/add")
     public ArithmeticOperation addNumbers(@RequestParam("first") int first,  @RequestParam("second") int second) {
-        if (first < 0 || first > 100 || second < 0 || second > 100) {
+        if (first < MIN_VALUE || first > MAX_VALUE || second < MIN_VALUE || second > MAX_VALUE) {
             throw new IllegalArgumentException("Arvud peavad olema vahemikus 0 kuni 100");}
         int sum = first + second;
         ArithmeticOperation arithmeticOperation = new ArithmeticOperation(first, second, sum);
@@ -29,15 +32,15 @@ public class ArithmeticOperationController {
     public List<ArithmeticOperation> searchOperations(
             @RequestParam(value = "number", required = false) Integer number,
             @RequestParam(value = "order", defaultValue = "asc") String order) {
-        if (number == null || number < 0 || number > 100) {
+        if (number == null || number < MIN_VALUE || number > MAX_VALUE) {
             throw new IllegalArgumentException("Arvud peavad olema vahemikus 0 kuni 100");}
         List<ArithmeticOperation> filteredAndOrderedOperations = new ArrayList<>();
-        for (int i = 0; i < operations.size(); i++) {
-            int attribute1 = operations.get(i).getAttributeFirst();
-            int attribute2 =operations.get(i).getAttributeSecond();
-            int sum = operations.get(i).getResult();
+        for (ArithmeticOperation operation : operations) {
+            int attribute1 = operation.getAttributeFirst();
+            int attribute2 = operation.getAttributeSecond();
+            int sum = operation.getResult();
             if (number == attribute1 || number == attribute2 || number == sum) {
-                filteredAndOrderedOperations.add(operations.get(i));
+                filteredAndOrderedOperations.add(operation);
             }
         }
 
@@ -45,7 +48,6 @@ public class ArithmeticOperationController {
             filteredAndOrderedOperations.sort(Comparator.comparingInt(ArithmeticOperation::getResult).reversed());
         } else{
             filteredAndOrderedOperations.sort(Comparator.comparingInt(ArithmeticOperation::getResult));}
-
 
         return filteredAndOrderedOperations;
 
