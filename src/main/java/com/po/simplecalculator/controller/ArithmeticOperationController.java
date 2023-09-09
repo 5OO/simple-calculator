@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -39,6 +40,11 @@ public class ArithmeticOperationController {
                 filteredAndOrderedOperations.add(operations.get(i));
             }
         }
+
+        if (order.equals("desc")) {
+            filteredAndOrderedOperations.sort(Comparator.comparingInt(ArithmeticOperation::getResult).reversed());
+        } else{
+            filteredAndOrderedOperations.sort(Comparator.comparingInt(ArithmeticOperation::getResult));}
 
 
         return filteredAndOrderedOperations;
