@@ -1,12 +1,12 @@
 # SimpleCalculator
 
-### projekti kirjeldus
+### projekti kirjeldus:
 
 
 Antud projektis on loodud lihtne Java Spring Boot 3.1.3 rakendus, mis kahe REST teenusega võimaldab arve liita ja teha päringuid varem tehtud liitmistoimingute hulgast. 
-Andmete talletamiseks on kasutatud lihtsat listi, mis peale rakenduse taaskäivitamist on tühi.  
+Andmete talletamiseks on kasutatud lihtsat listi, st peale rakenduse taaskäivitamist on see tühi.  
 
-Esimene teenus võimaldab liita kahte täisarvulist liidetavat, vahemikust 0-100 ja tagastab summa.
+Esimene teenus võimaldab liita kahte täisarvulist liidetavat, vahemikust 0-100 ja tagastatakse summa.
 Teise teenusega on võimalik teostada ühe täisarvu põhist otsingut varasemate liidetavate või summade hulgast ning tulemus väljastatakse summa järgi kas kasvavalt või kahanevalt.
 
 ### eeldused:
