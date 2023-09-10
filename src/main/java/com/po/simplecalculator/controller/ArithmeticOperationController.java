@@ -35,7 +35,7 @@ public class ArithmeticOperationController {
     @GetMapping("/operations/search")
     public List<ArithmeticOperation> searchOperations(
             @RequestParam(value = "number", required = false) Integer number,
-            @RequestParam(value = "order", defaultValue = "asc") String order) {
+            @RequestParam(value = "order") String order) {
         if (number == null) {
             throw new IllegalArgumentException("number peab olema väärtustatud");
         } else if (number < MIN_VALUE || number > MAX_VALUE) {
