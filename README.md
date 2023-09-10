@@ -22,15 +22,15 @@ Teise teenusega on võimalik teostada ühe täisarvu põhist otsingut varasemate
 
 #### sisesta väärtused:  
 * URL: '/operations/add'
-* Meetod: 'GET'  
+* Meetod: '__GET__'  
 *  Parameetrid:
-* first: Esimene arv (kohustuslik).
-* second: Teine arv (kohustuslik).
+* _first_: esimene arv (kohustuslik).
+* _second_: teine arv (kohustuslik).
 
 #### otsi arvutuste hulgast:
 
 * URL: '/operations/search'
-* Meetod: 'GET'
+* Meetod: '__GET__'
 * Parameetrid:
-* number: Otsitav arv (valikuline).
-* order: Sorteerimise järjekord - kas asc või desc.
+* _number_: otsitav arv (valikuline).
+* _order_: sorteerimise järjekord - kui kasvav, siis sisestada  _asc_ või kahaneva puhul sisestada  _desc_.
